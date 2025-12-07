@@ -6,4 +6,5 @@ export { DaysSelector } from './DaysSelector';
 export { CurrentWeatherCard } from './CurrentWeatherCard';
 export { ForecastList } from './ForecastList';
 export { WeatherSection } from './WeatherSection';
+export { HistoryList } from './HistoryList';
 export * from './ui';

@@ -5,3 +5,8 @@ export const CACHE_TIMES = {
 } as const;
 
 export const API_TIMEOUT = 5000;
+
+export const HISTORY_CONFIG = {
+  MAX_ITEMS: 6,
+  STORAGE_KEY: 'cep-history',
+} as const;

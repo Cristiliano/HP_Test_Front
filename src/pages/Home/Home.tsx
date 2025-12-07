@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { MapPin } from 'lucide-react';
 import {
   Card,
@@ -11,18 +11,29 @@ import {
   ErrorDisplay,
   Footer,
   WeatherSection,
+  HistoryList,
 } from '@/components';
-import { useDarkMode, useCepQuery, useDebounce } from '@/hooks';
+import { useDarkMode, useCepQuery, useDebounce, useCepHistory } from '@/hooks';
 
 export function Home() {
   const { isDark, toggle } = useDarkMode();
   const [cep, setCep] = useState('');
   const [searchCep, setSearchCep] = useState('');
+  const lastAddedCepRef = useRef<string | null>(null);
   
   const debouncedCep = useDebounce(searchCep, 300);
   const { data, isLoading, isError, errorMessage, refetch } = useCepQuery(debouncedCep, {
     enabled: debouncedCep.length === 8,
   });
+
+  const { history, addToHistory, clearHistory, removeFromHistory } = useCepHistory();
+
+  useEffect(() => {
+    if (data && data.cep !== lastAddedCepRef.current) {
+      addToHistory(data);
+      lastAddedCepRef.current = data.cep;
+    }
+  }, [data, addToHistory]);
 
   const handleSearch = useCallback((value: string) => {
     const cleanCep = value.replace(/\D/g, '');
@@ -33,6 +44,12 @@ export function Home() {
   const handleRetry = useCallback(() => {
     refetch();
   }, [refetch]);
+
+  const handleSelectFromHistory = useCallback((selectedCep: string) => {
+    const formatted = selectedCep.replace(/(\d{5})(\d{3})/, '$1-$2');
+    setCep(formatted);
+    setSearchCep(selectedCep.replace(/\D/g, ''));
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -68,6 +85,13 @@ export function Home() {
               />
             </CardContent>
           </Card>
+
+          <HistoryList
+            history={history}
+            onSelect={handleSelectFromHistory}
+            onClear={clearHistory}
+            onRemove={removeFromHistory}
+          />
 
           {isLoading && (
             <div className="py-8">
