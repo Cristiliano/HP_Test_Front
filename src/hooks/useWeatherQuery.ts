@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchWeather, geocodeCity, WeatherError } from '@/api';
 import type { WeatherData, Address } from '@/types';
-import { CACHE_TIMES } from '@/lib/config';
+import { CACHE_TIMES } from '@/config';
 
 interface UseWeatherQueryOptions {
   enabled?: boolean;

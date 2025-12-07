@@ -1,12 +1,10 @@
 import axios from 'axios';
 import type { GeocodingResponse, GeocodingResult } from '@/types';
-
-const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
-const TIMEOUT = 5000;
+import { API_CONFIG } from '@/config';
 
 const geocodingClient = axios.create({
-  baseURL: GEOCODING_URL,
-  timeout: TIMEOUT,
+  baseURL: API_CONFIG.GEOCODING_URL,
+  timeout: API_CONFIG.TIMEOUT,
 });
 
 export class GeocodingError extends Error {

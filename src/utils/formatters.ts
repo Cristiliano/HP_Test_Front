@@ -39,3 +39,15 @@ export function formatRelativeTime(timestamp: number): string {
   const months = Math.floor(diff / MONTH);
   return `há ${months} ${months === 1 ? 'mês' : 'meses'}`;
 }
+
+export function formatCep(cep: string): string {
+  const clean = cep.replace(/\D/g, '');
+  if (clean.length === 8) {
+    return `${clean.slice(0, 5)}-${clean.slice(5)}`;
+  }
+  return cep;
+}
+
+export function cleanCep(cep: string): string {
+  return cep.replace(/\D/g, '');
+}

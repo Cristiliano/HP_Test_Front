@@ -1,21 +1,13 @@
 import { Clock, Trash2, MapPin, X } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '@/components/ui';
 import type { CepHistoryItem } from '@/types';
-import { formatRelativeTime } from '@/lib/dateUtils';
+import { formatRelativeTime, formatCep } from '@/utils';
 
 interface HistoryListProps {
   history: CepHistoryItem[];
   onSelect: (cep: string) => void;
   onClear: () => void;
   onRemove: (cep: string) => void;
-}
-
-function formatCep(cep: string): string {
-  const clean = cep.replace(/\D/g, '');
-  if (clean.length === 8) {
-    return `${clean.slice(0, 5)}-${clean.slice(5)}`;
-  }
-  return cep;
 }
 
 export function HistoryList({ history, onSelect, onClear, onRemove }: HistoryListProps) {

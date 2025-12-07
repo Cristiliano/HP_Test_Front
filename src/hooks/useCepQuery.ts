@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchCep, CepNotFoundError, CepServiceError } from '@/api';
 import type { Address } from '@/types';
-import { CACHE_TIMES } from '@/lib/config';
+import { CACHE_TIMES } from '@/config';
 
 interface UseCepQueryOptions {
   enabled?: boolean;

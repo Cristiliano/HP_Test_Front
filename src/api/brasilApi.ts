@@ -1,13 +1,10 @@
 import axios from 'axios';
-import type { BrasilApiCepResponse } from '@/types';
-import type { Address } from '@/types';
-
-const BRASIL_API_URL = 'https://brasilapi.com.br/api/cep/v2';
-const TIMEOUT = 5000;
+import type { BrasilApiCepResponse, Address } from '@/types';
+import { API_CONFIG } from '@/config';
 
 const brasilApiClient = axios.create({
-  baseURL: BRASIL_API_URL,
-  timeout: TIMEOUT,
+  baseURL: API_CONFIG.BRASIL_API_URL,
+  timeout: API_CONFIG.TIMEOUT,
 });
 
 export async function fetchCepFromBrasilApi(cep: string): Promise<Address> {

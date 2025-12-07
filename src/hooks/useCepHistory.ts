@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import type { Address, CepHistoryItem } from '@/types';
-import { HISTORY_CONFIG } from '@/lib/config';
+import { HISTORY_CONFIG } from '@/config';
 
 function loadHistory(): CepHistoryItem[] {
   try {

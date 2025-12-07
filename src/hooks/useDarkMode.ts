@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { DARK_MODE_CONFIG } from '@/config';
 
 export function useDarkMode() {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme');
+      const stored = localStorage.getItem(DARK_MODE_CONFIG.STORAGE_KEY);
       if (stored) {
         return stored === 'dark';
       }
@@ -16,10 +17,10 @@ export function useDarkMode() {
     const root = document.documentElement;
     if (isDark) {
       root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      localStorage.setItem(DARK_MODE_CONFIG.STORAGE_KEY, 'dark');
     } else {
       root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      localStorage.setItem(DARK_MODE_CONFIG.STORAGE_KEY, 'light');
     }
   }, [isDark]);
 

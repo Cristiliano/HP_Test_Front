@@ -6,13 +6,11 @@ import type {
   DailyForecast,
 } from '@/types';
 import { getWeatherDescription } from '@/types';
-
-const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
-const TIMEOUT = 5000;
+import { API_CONFIG } from '@/config';
 
 const forecastClient = axios.create({
-  baseURL: FORECAST_URL,
-  timeout: TIMEOUT,
+  baseURL: API_CONFIG.FORECAST_URL,
+  timeout: API_CONFIG.TIMEOUT,
 });
 
 export class WeatherError extends Error {
