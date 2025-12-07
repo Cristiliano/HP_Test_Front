@@ -59,21 +59,18 @@ export function AddressCard({ address }: AddressCardProps) {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* CEP */}
           <InfoItem
             icon={<Navigation className="w-4 h-4" />}
             label="CEP"
             value={address.cep}
           />
 
-          {/* Logradouro */}
           <InfoItem
             icon={<Building2 className="w-4 h-4" />}
             label="Logradouro"
             value={address.logradouro}
           />
 
-          {/* Bairro */}
           <InfoItem
             icon={<Map className="w-4 h-4" />}
             label="Bairro"
@@ -81,21 +78,18 @@ export function AddressCard({ address }: AddressCardProps) {
             className="sm:col-span-2"
           />
 
-          {/* Cidade */}
           <InfoItem
             icon={<MapPin className="w-4 h-4" />}
             label="Cidade"
             value={address.cidade}
           />
 
-          {/* Estado */}
           <InfoItem
             icon={<Building2 className="w-4 h-4" />}
             label="Estado"
             value={address.uf}
           />
 
-          {/* DDD */}
           {address.ddd && (
             <InfoItem
               icon={<Phone className="w-4 h-4" />}
@@ -104,14 +98,12 @@ export function AddressCard({ address }: AddressCardProps) {
             />
           )}
 
-          {/* Código IBGE */}
           <InfoItem
             icon={<Hash className="w-4 h-4" />}
             label="Código IBGE"
             value={address.ibge}
           />
 
-          {/* Código SIAFI */}
           {address.siafi && (
             <InfoItem
               icon={<Hash className="w-4 h-4" />}
@@ -120,7 +112,6 @@ export function AddressCard({ address }: AddressCardProps) {
             />
           )}
 
-          {/* Coordinates - only show when available (BrasilAPI) */}
           {hasCoordinates && (
             <InfoItem
               icon={<Globe className="w-4 h-4" />}
@@ -131,7 +122,6 @@ export function AddressCard({ address }: AddressCardProps) {
           )}
         </div>
 
-        {/* Provider Badge */}
         <div className="mt-4 flex justify-end">
           <span
             className={`

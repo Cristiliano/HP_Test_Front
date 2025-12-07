@@ -10,6 +10,7 @@ import {
   AddressCard,
   ErrorDisplay,
   Footer,
+  WeatherSection,
 } from '@/components';
 import { useDarkMode, useCepQuery, useDebounce } from '@/hooks';
 
@@ -35,17 +36,14 @@ export function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
       <header className="w-full py-4 px-4">
-        <div className="max-w-2xl mx-auto flex justify-end">
+        <div className="max-w-4xl mx-auto flex justify-end">
           <DarkModeToggle isDark={isDark} onToggle={toggle} />
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-4 py-4">
-        <div className="w-full max-w-2xl space-y-6">
-          {/* Search Card */}
+      <main className="flex-1 px-4 py-4">
+        <div className="w-full max-w-4xl mx-auto space-y-6">
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
@@ -54,10 +52,10 @@ export function Home() {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                    Consulta de CEP
+                    Consulta de CEP e Clima
                   </h1>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Digite o CEP para buscar o endereço completo
+                    Digite o CEP para buscar o endereço e a previsão do tempo
                   </p>
                 </div>
               </div>
@@ -71,7 +69,6 @@ export function Home() {
             </CardContent>
           </Card>
 
-          {/* Loading State */}
           {isLoading && (
             <div className="py-8">
               <Spinner size="lg" />
@@ -81,17 +78,19 @@ export function Home() {
             </div>
           )}
 
-          {/* Error State */}
           {isError && errorMessage && !isLoading && (
             <ErrorDisplay message={errorMessage} onRetry={handleRetry} />
           )}
 
-          {/* Success State - Address Card */}
-          {data && !isLoading && !isError && <AddressCard address={data} />}
+          {data && !isLoading && !isError && (
+            <>
+              <AddressCard address={data} />
+              <WeatherSection address={data} />
+            </>
+          )}
         </div>
       </main>
 
-      {/* Footer */}
       <Footer provider={data?.provider} />
     </div>
   );

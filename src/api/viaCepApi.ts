@@ -33,7 +33,6 @@ function normalizeViaCepResponse(data: ViaCepResponse): Address {
     ddd: data.ddd || undefined,
     ibge: data.ibge || undefined,
     siafi: data.siafi || undefined,
-    // ViaCEP não tem coordenadas
     latitude: undefined,
     longitude: undefined,
     provider: 'ViaCEP',
