@@ -27,7 +27,6 @@ describe('CEP Service', () => {
       expect(address.cidade).toBe('São Paulo');
       expect(address.ddd).toBe('11');
       expect(address.ibge).toBe('3550308');
-      // ViaCEP doesn't provide coordinates
       expect(address.latitude).toBeUndefined();
       expect(address.longitude).toBeUndefined();
     });
@@ -48,7 +47,7 @@ describe('CEP Service', () => {
     });
 
     it('should throw CepServiceError when both APIs fail with server error', async () => {
-      // Override handlers for this test
+      // Substituir handlers para este teste, pra simular erro 500 em ambas APIs
       server.use(
         http.get('https://brasilapi.com.br/api/cep/v2/11111111', () => {
           return new HttpResponse(null, { status: 500 });

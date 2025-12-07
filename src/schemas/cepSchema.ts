@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// CEP validation schema - accepts with or without hyphen
+// Schema de validação de CEP - aceita com ou sem hífen
 export const cepSchema = z.object({
   cep: z
     .string()
@@ -16,7 +16,7 @@ export const cepSchema = z.object({
 
 export type CepFormData = z.infer<typeof cepSchema>;
 
-// Raw input schema (before transform)
+// Schema de entrada bruta (antes da transformação)
 export const cepInputSchema = z
   .string()
   .min(1, 'CEP é obrigatório')

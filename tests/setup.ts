@@ -3,15 +3,15 @@ import { cleanup } from '@testing-library/react';
 import { afterEach, beforeAll, afterAll } from 'vitest';
 import { server } from './mocks/server';
 
-// Establish API mocking before all tests.
+// Estabelecer mock de API antes de todos os testes.
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 
-// Reset any request handlers that we may add during the tests,
-// so they don't affect other tests.
+// Resetar qualquer handler de requisição que adicionemos durante os testes,
+// para que não afetem outros testes.
 afterEach(() => {
   cleanup();
   server.resetHandlers();
 });
 
-// Clean up after the tests are finished.
+// Limpar após os testes serem finalizados.
 afterAll(() => server.close());

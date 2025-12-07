@@ -8,8 +8,8 @@ export interface BrasilApiCepResponse {
   location?: {
     type: string;
     coordinates: {
-      longitude: number;
-      latitude: number;
+      longitude: string | number;
+      latitude: string | number;
     };
   };
 }

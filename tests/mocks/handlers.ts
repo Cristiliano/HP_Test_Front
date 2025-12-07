@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-// Mock responses
+// Respostas simuladas
 const brasilApiSuccessResponse = {
   cep: '01310100',
   state: 'SP',
@@ -38,27 +38,27 @@ const viaCepNotFoundResponse = {
 };
 
 export const handlers = [
-  // BrasilAPI - Success
+  // BrasilAPI - Sucesso
   http.get('https://brasilapi.com.br/api/cep/v2/01310100', () => {
     return HttpResponse.json(brasilApiSuccessResponse);
   }),
 
-  // BrasilAPI - Not found (fallback to ViaCEP)
+  // BrasilAPI - Não encontrado (fallback para ViaCEP)
   http.get('https://brasilapi.com.br/api/cep/v2/00000000', () => {
     return new HttpResponse(null, { status: 404 });
   }),
 
-  // BrasilAPI - Server error (fallback to ViaCEP)
+  // BrasilAPI - Erro do servidor (fallback para ViaCEP)
   http.get('https://brasilapi.com.br/api/cep/v2/99999999', () => {
     return new HttpResponse(null, { status: 500 });
   }),
 
-  // ViaCEP - Success (fallback)
+  // ViaCEP - Sucesso (fallback)
   http.get('https://viacep.com.br/ws/99999999/json/', () => {
     return HttpResponse.json(viaCepSuccessResponse);
   }),
 
-  // ViaCEP - Not found
+  // ViaCEP - Não encontrado
   http.get('https://viacep.com.br/ws/00000000/json/', () => {
     return HttpResponse.json(viaCepNotFoundResponse);
   }),

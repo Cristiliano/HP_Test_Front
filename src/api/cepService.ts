@@ -17,10 +17,10 @@ export class CepServiceError extends Error {
 }
 
 /**
- * Fetches CEP data with fallback strategy:
- * 1. Try BrasilAPI first (has coordinates)
- * 2. On failure, fallback to ViaCEP
- * 3. If both fail, throw appropriate error
+ * Busca dados de CEP utilizando múltiplos provedores com fallback:
+ * 1. Tenta BrasilAPI primeiro (possui coordenadas)
+ * 2. Em caso de falha, faz fallback para ViaCEP (sem coordenadas)
+ * 3. Se ambas falham, lança erro 
  */
 export async function fetchCep(cep: string): Promise<Address> {
   const cleanCep = cep.replace(/\D/g, '');
@@ -30,20 +30,20 @@ export async function fetchCep(cep: string): Promise<Address> {
   }
 
   try {
-    // Try BrasilAPI first
+    // Tenta BrasilAPI primeiro
     const address = await fetchCepFromBrasilApi(cleanCep);
     return address;
   } catch (brasilApiError) {
-    console.warn('BrasilAPI failed, trying ViaCEP...', brasilApiError);
+    console.warn('BrasilAPI falhou, tentando ViaCEP...', brasilApiError);
 
     try {
-      // Fallback to ViaCEP
+      // Fallback para ViaCEP
       const address = await fetchCepFromViaCep(cleanCep);
       return address;
     } catch (viaCepError) {
-      console.error('Both APIs failed', { brasilApiError, viaCepError });
+      console.error('Ambas as APIs falharam', { brasilApiError, viaCepError });
 
-      // Check if it's a "not found" error
+      // Verifica se é um erro de "não encontrado"
       if (
         viaCepError instanceof Error &&
         viaCepError.message === 'CEP não encontrado'

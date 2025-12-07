@@ -26,7 +26,7 @@ export function Footer({ provider }: FooterProps) {
             >
               BrasilAPI
             </a>
-            {' '}e{' '}
+            {' '}|{' '}
             <a
               href="https://viacep.com.br"
               target="_blank"

@@ -43,7 +43,7 @@ export function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-4 py-8">
+      <main className="flex-1 flex items-center justify-center px-4 py-4">
         <div className="w-full max-w-2xl space-y-6">
           {/* Search Card */}
           <Card>

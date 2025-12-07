@@ -14,9 +14,9 @@ export function useCepQuery(cep: string, options: UseCepQueryOptions = {}) {
     queryKey: ['cep', cleanCep],
     queryFn: () => fetchCep(cleanCep),
     enabled: isValidCep && (options.enabled ?? true),
-    retry: false, // We handle fallback in the service
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 30, // 30 minutes
+    retry: false, // Tratamos fallback no serviço
+    staleTime: 1000 * 60 * 5, // 5 minutos
+    gcTime: 1000 * 60 * 30, // 30 minutos
   });
 
   const getErrorMessage = (): string | null => {

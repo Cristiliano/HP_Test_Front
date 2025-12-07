@@ -26,8 +26,12 @@ function normalizeBrasilApiResponse(data: BrasilApiCepResponse): Address {
     bairro: data.neighborhood || '',
     cidade: data.city || '',
     uf: data.state || '',
-    latitude: data.location?.coordinates?.latitude,
-    longitude: data.location?.coordinates?.longitude,
+    latitude: data.location?.coordinates?.latitude 
+      ? parseFloat(String(data.location.coordinates.latitude))
+      : undefined,
+    longitude: data.location?.coordinates?.longitude 
+      ? parseFloat(String(data.location.coordinates.longitude))
+      : undefined,
     provider: 'BrasilAPI',
   };
 }
