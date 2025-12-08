@@ -455,3 +455,19 @@ tests/
 - Transições suaves
 - Totalmente responsivo (mobile-first)
 
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença **MIT** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+## 👤 Autor
+
+**Cristiliano Cardoso**
+
+- GitHub: [@Cristiliano](https://github.com/Cristiliano)
+- Projeto: [HP_Test_Front](https://github.com/Cristiliano/HP_Test_Front)
+
+
