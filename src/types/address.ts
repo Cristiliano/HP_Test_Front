@@ -21,3 +21,10 @@ export interface CepQueryResult {
   error: Error | null;
   refetch: () => void;
 }
+
+export interface CepHistoryItem {
+  cep: string;
+  cidade: string;
+  uf: string;
+  timestamp: number;
+}

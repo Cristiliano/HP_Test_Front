@@ -1,13 +1,10 @@
 import axios from 'axios';
-import type { ViaCepResponse } from '@/types';
-import type { Address } from '@/types';
-
-const VIACEP_URL = 'https://viacep.com.br/ws';
-const TIMEOUT = 5000;
+import type { ViaCepResponse, Address } from '@/types';
+import { API_CONFIG } from '@/config';
 
 const viaCepClient = axios.create({
-  baseURL: VIACEP_URL,
-  timeout: TIMEOUT,
+  baseURL: API_CONFIG.VIACEP_URL,
+  timeout: API_CONFIG.TIMEOUT,
 });
 
 export async function fetchCepFromViaCep(cep: string): Promise<Address> {
@@ -33,7 +30,6 @@ function normalizeViaCepResponse(data: ViaCepResponse): Address {
     ddd: data.ddd || undefined,
     ibge: data.ibge || undefined,
     siafi: data.siafi || undefined,
-    // ViaCEP não tem coordenadas
     latitude: undefined,
     longitude: undefined,
     provider: 'ViaCEP',

@@ -30,20 +30,17 @@ export async function fetchCep(cep: string): Promise<Address> {
   }
 
   try {
-    // Tenta BrasilAPI primeiro
     const address = await fetchCepFromBrasilApi(cleanCep);
     return address;
   } catch (brasilApiError) {
     console.warn('BrasilAPI falhou, tentando ViaCEP...', brasilApiError);
 
     try {
-      // Fallback para ViaCEP
       const address = await fetchCepFromViaCep(cleanCep);
       return address;
     } catch (viaCepError) {
       console.error('Ambas as APIs falharam', { brasilApiError, viaCepError });
 
-      // Verifica se é um erro de "não encontrado"
       if (
         viaCepError instanceof Error &&
         viaCepError.message === 'CEP não encontrado'

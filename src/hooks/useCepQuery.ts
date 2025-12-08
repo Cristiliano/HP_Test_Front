@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchCep, CepNotFoundError, CepServiceError } from '@/api';
 import type { Address } from '@/types';
+import { CACHE_TIMES } from '@/config';
 
 interface UseCepQueryOptions {
   enabled?: boolean;
@@ -14,9 +15,9 @@ export function useCepQuery(cep: string, options: UseCepQueryOptions = {}) {
     queryKey: ['cep', cleanCep],
     queryFn: () => fetchCep(cleanCep),
     enabled: isValidCep && (options.enabled ?? true),
-    retry: false, // Tratamos fallback no serviço
-    staleTime: 1000 * 60 * 5, // 5 minutos
-    gcTime: 1000 * 60 * 30, // 30 minutos
+    retry: false,
+    staleTime: CACHE_TIMES.FIVE_MINUTES,
+    gcTime: CACHE_TIMES.THIRTY_MINUTES,
   });
 
   const getErrorMessage = (): string | null => {
