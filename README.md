@@ -55,6 +55,63 @@ npm run test
 
 # Rodar testes uma vez
 npm run test:run
+
+# Rodar testes com cobertura
+npm run test:coverage
+```
+
+## 🐳 Docker
+
+A aplicação pode ser executada em um container Docker.
+
+### Build e execução
+
+```bash
+# Build da imagem
+docker build -t hp-test-front .
+
+# Executar o container
+docker run -d -p 8080:80 --name hp-test-front hp-test-front
+
+# Acessar a aplicação
+# Abra http://localhost:8080 no navegador
+```
+
+### Comandos úteis
+
+```bash
+# Ver logs do container
+docker logs hp-test-front
+
+# Parar o container
+docker stop hp-test-front
+
+# Remover o container
+docker rm hp-test-front
+
+# Reconstruir e executar (útil após mudanças)
+docker build -t hp-test-front . && docker run -d -p 8080:80 --name hp-test-front hp-test-front
+```
+
+### Docker Compose (opcional)
+
+Crie um arquivo `docker-compose.yml`:
+
+```yaml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+```
+
+Execute com:
+
+```bash
+docker-compose up -d
 ```
 
 ## 🏗️ Estrutura do Projeto
